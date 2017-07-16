@@ -5,5 +5,5 @@ import akka.actor.ActorSystem
 object Application extends App {
   val system = ActorSystem("MyActorSystem")
   val curlActor = system.actorOf(CurlActor.props, "curlActor")
-  curlActor ! CurlActor.CurlSite("https://www.polidea.com")
+  curlActor ! CurlActor.CurlSiteMessage("https://www.polidea.com")
 }

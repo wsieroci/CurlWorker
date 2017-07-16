@@ -8,7 +8,7 @@ class CurlActor extends Actor with ActorLogging {
   import CurlActor._
 
   def receive = {
-    case CurlSite(url) =>
+    case CurlSiteMessage(url) =>
       val response = Http(url).param("q", "polidea").asString
       println(response)
   }
@@ -16,5 +16,5 @@ class CurlActor extends Actor with ActorLogging {
 
 object CurlActor {
   val props = Props[CurlActor]
-  case class CurlSite(url: String)
+  case class CurlSiteMessage(url: String)
 }
