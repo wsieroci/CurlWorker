@@ -1,9 +1,10 @@
 package com.wiktorsierocinski.curlworker
 
-import akka.actor.ActorSystem
+import akka.actor.{ActorRef, ActorSystem}
 
 object Application extends App {
   val system = ActorSystem("MyActorSystem")
-  val curlActor = system.actorOf(CurlActor.props, "curlActor")
-  curlActor ! CurlActor.CurlSiteMessage("https://www.polidea.com")
+  val curlActor = system.actorOf(HttpRequestActor.props, "httpRequestActor")
+  val randomUrlGeneratorActor = system.actorOf(RandomUrlGeneratorActor.props, "randomUrlGeneratorActor")
+  randomUrlGeneratorActor ! RandomUrlGeneratorActor.GenerateNewUrlMessage(curlActor)
 }
