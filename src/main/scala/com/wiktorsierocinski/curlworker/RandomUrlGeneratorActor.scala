@@ -17,8 +17,8 @@ class RandomUrlGeneratorActor extends Actor with ActorLogging {
   val URL_GENERATION_FREQUENCY_IN_SEC = 5
 
   def receive = {
-
     case GenerateNewUrlMessage(recipient) =>
+      log.info("Generating new url...")
       recipient ! HttpRequestActor.RequestUrlMessage(Random.shuffle(URL_LIST).head)
 
     case StartGeneratingRandomUrlsMessage(recipient) =>
@@ -38,5 +38,4 @@ object RandomUrlGeneratorActor {
   case class GenerateNewUrlMessage(recipient: ActorRef)
 
   case class StartGeneratingRandomUrlsMessage(recipient: ActorRef)
-
 }
